@@ -6,6 +6,13 @@
           <p class="padding-top-xsm">{{ description }}</p>
 
           <div class="text-md">
+            <a :href=" item.link" :title=" item.link" target="_blank" :style=" contactStyle"
+            v-for="item in contacts">
+
+
+              <i :class="`fa fa-${item.icon}`"></i>
+              <!-- {{ item }} -->
+            </a>
 
           </div>
 
@@ -20,12 +27,18 @@
               <h4>{{ sponsor.title }}</h4>
 
               <ul class="list-unstyled">
+                  <li v-for="item in sponsor.list">
+                    <a v-bind:href="item.link"  target="_blank" v-bind:title="item.title">
+                      <img v-bind:src="item.logo" v-bind:alt=" item.title" :title=" item.title"
+                      class="footer-sponsor-link" width="98">
+                    </a>
+                    <!-- {{ item}} -->
+                  </li>
 
               </ul>
             </div>
 
             <div class="col-sm-4">
-
 
               <ul class="list-unstyled">
                 <li v-for="item in statistics.list">{{ item.title }}: {{ item.description }}</li>
@@ -58,7 +71,27 @@ export default {
   name: "Footer",
   data() {
     return {
-      description: "你是测试数据",
+      description: 'Learnku Vue.js 是一个 Vue.js 的知识社区',
+      contactStyle: {
+        paddingRight: '18px'
+      },
+      contacts: [
+        {
+          icon: 'envelope',
+          title: '反馈问题',
+          link: 'mailto:summer@yousails.com'
+        },
+        {
+          icon: 'weibo',
+          title: '站长微博',
+          link: 'https://weibo.com/1837553744/profile?topnav=1&wvr=6'
+        },
+        {
+          icon: 'weixin',
+          title: '加我微信',
+          link: 'https://learnku.com/vuejs/contact'
+        }
+      ],
 
       designer: `<span style="font-size:0.9em">Designed by
           <span style="color: #e27575;font-size: 14px;">❤</span>
