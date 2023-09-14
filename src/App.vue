@@ -2,14 +2,12 @@
   <div id="wrap">
     <TheHeaders />
 
-
-      <!-- <h1>{{ footer}}</h1> -->
-
+    <div id="main-container" class="container main-container">
+      <router-view />
     </div>
-    <TheFooter />
 
-
-
+  </div>
+  <TheFooter />
 </template>
 
 <script>
