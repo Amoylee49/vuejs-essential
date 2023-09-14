@@ -1,5 +1,10 @@
 <template>
-  <div class="container">
+  <div id="wrap">
+    <TheHeaders/>
+  </div>
+
+
+  <!-- <div class="container">
     <div class="jumbotron">
       <div class="container">
         <h1>Welcome from Bootstrap</h1>
@@ -21,25 +26,41 @@
         </p>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue';
+import TheHeaders from './components/layouts/TheHeaders.vue';
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
-}
+    TheHeaders
+  }
 }
 </script>
 
 <style lang="scss">
+$container-large-desktop: 1200px;
+$btn-primary-bg: #00b5ad;
+$btn-primary-border: #00b5ad;
+$label-primary-bg: #00b5ad;
+$pagination-active-bg: #00b5ad;
+$pagination-active-border: #00b5ad;
+$pagination-color: #00b5ad;
+$input-border-focus: #00b5ad;
+$link-color: #12c4c5;
+$link-hover-color: #22ddde;
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $fa-font-path: "~font-awesome/fonts/";
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "~font-awesome/scss/font-awesome";
+@import "./styles/main.scss";
+@import "./styles/extra.scss";
 
-body > .container { margin-top: 15px;}
+body>.container {
+  margin-top: 15px;
+}
 </style>
