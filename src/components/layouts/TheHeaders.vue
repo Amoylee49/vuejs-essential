@@ -12,6 +12,17 @@
           <li v-for="(item, index) in navList" v-bind:class="{ active: index === navActiveIndex }">
             <a href="#" @click="changeNavIndex(index)"> {{ item }}</a>
           </li>
+
+          <!-- 编辑资料 -->
+          <li >
+            <router-link to="/users/1/edit">
+              <i class="fa fa-cog text-md i-middle"></i>
+              编辑资料
+            </router-link>
+          </li>
+        </ul>
+        <ul>
+
         </ul>
       </div>
 
