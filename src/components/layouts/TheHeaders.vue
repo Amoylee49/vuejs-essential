@@ -7,6 +7,15 @@
           <img v-bind:src="logo.src" :alt="logo.title" />
         </a>
       </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li v-for="(item, index) in navList" v-bind:class="{ active: index === navActiveIndex }">
+            <a href="#" @click="changeNavIndex(index)"> {{ item }}</a>
+          </li>
+        </ul>
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -18,19 +27,29 @@ export default {
     return {
       logo: {
         src: `${this.uploadsUrl}images/202101/26/48878/4NbpRGTbE3.png`,
-        title : " learnKu js"
+        title: " learnKu js"
       },
-        title : "logo js"
+      title: "logo js",
+      navList: ["社区", "文档", "问答", "头条"],
+      navActiveIndex: 0
     }
 
   },
   beforeCreate() {
     this.uploadsUrl = "https://cdn.learnku.com/uploads/";
   },
+  methods: {
+    changeNavIndex(index) {
+      this.navActiveIndex = index
+    }
+  }
 }
 </script>
 <style scoped>
 .title {
   display: none;
-}
-</style>
+
+  .navbar-default .navbar-nav>.active>a {
+    background: rgba(0, 0, 0, .03);
+  }
+}</style>
