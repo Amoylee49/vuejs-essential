@@ -3,9 +3,8 @@
     <div class="col-md-3 main-col">
       <div class="box">
         <div class="padding-md">
-          <!-- <h1>lsdkjflsdj</h1> -->
+          <h1>个人资料名片</h1>
           <div class="list-group text-center">
-
 
             <router-link v-for="link in links" :key="link.name" :to="`/users/1/${link.name}`" class="list-group-item">
               <i :class="`text-md fa fa-${link.icon}`"></i>

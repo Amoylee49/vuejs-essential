@@ -23,10 +23,11 @@
             <label class="control-label">图片验证码</label>
             <input type="text" class="form-control" placeholder="请填写验证码">
           </div>
-            <div class="thumbnail" title="点击图片重新获取验证码">
-              <div class="captcha"></div>
+          <!-- 为 -->
+          <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
+            <div class="captcha vcenter" v-html="captchaTpl"></div>
           </div>
-          <button type="submit" class="btn btn-lg btn-success btn-block">
+          <button type="submit" class="btn btn-lg btn-success btn-block" @click="register">
             <i class="fa fa-btn fa-sign-in"></i> 注册
           </button>
         </div>
@@ -36,12 +37,86 @@
 </template>
 
 <script>
+import createCaptcha from '@/utils/createCaptcha'
+import ls from '@/utils/localStorage'
+
 export default {
-  name: 'Register'
+  name: 'Register',
+  data() {
+    return {
+      captchaTpl: '', // 验证码模板
+      username: '', // 用户名
+      password: '', // 密码
+      cpassword: '', // 确认密码
+      captcha: '' // 验证码
+    }
+  },
+  created() {
+    this.getCaptcha()
+  },
+  methods: {
+    getCaptcha() {
+      const { tpl, captcha } = createCaptcha(6)
+
+      this.captchaTpl = tpl
+      this.localCaptcha = captcha
+    },
+    register(e) {
+      setTimeout(() => {
+        const target = e.target.type === 'submit' ? e.target : e.target.parentElement
+
+        if (true && target.canSubmit) {
+          this.submit()
+        }
+      })
+    },
+    submit() {
+      if (false && this.captcha.toUpperCase() !== this.localCaptcha) {
+        alert('验证码不正确')
+        this.getCaptcha()
+      } else {
+        const user = {
+          name: this.username,
+          password: this.password,
+          avatar: `https://api.adorable.io/avatars/200/${this.username}.png`
+        }
+        // 为 => 从仓库获取用户信息
+        const localUser = this.$store.state.user
+
+        if (localUser) {
+          if (localUser.name === user.name) {
+            alert('用户名已存在')
+          } else {
+            this.login(user)
+          }
+        } else {
+          this.login(user)
+        }
+      }
+    },
+    login(user) {
+      // 为 => 分发 login 事件，以保存用户信息和登录
+      this.$store.dispatch('login', user)
+      alert('注册成功')
+    }
+  }
 }
 </script>
-
 <style scoped>
-.thumbnail { width: 170px; margin-top: 10px; cursor: pointer;}
-.thumbnail .captcha { height: 46px; background: #E1E6E8;}
+.thumbnail {
+  width: 170px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.thumbnail .captcha {
+  height: 46px;
+  background: #E1E6E8;
+}
+
+.captcha {
+  font-size: 24px;
+  font-weight: bold;
+  user-select: none;
+}
 </style>
