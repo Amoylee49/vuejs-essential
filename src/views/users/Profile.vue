@@ -1,6 +1,11 @@
 <template>
   <div class="col-md-9 left-col">
     <div class="panel panel-default padding-md">
+<!-- //消息组件 -->
+<Message :show.sync ="msgShow" :msg="msg" :type="msgType"> </Message>
+<!-- <Message :show.sync="msgShow" :type="msgType" :msg="msg"/> -->
+
+
       <div class="panel-body">
         <h2><i class="fa fa-cog"></i> 编辑个人资料</h2>
         <hr>
@@ -73,7 +78,11 @@ export default {
       username: '', // 用户名
       sex: '', // 性别
       hobbies: [], // 兴趣
-      introduction: '' // 个人简介
+      introduction: '', // 个人简介
+
+      msg: '',
+      msgType:'',
+      msgShow: false // 是否显示消息，默认不显示
     }
   },
   created() {
@@ -98,8 +107,20 @@ export default {
             hobbies: this.hobbies,
             introduction: this.introduction
           })
-          alert('修改成功')
+          this.showMsg('修改成功','success')
+          // alert('修改成功')
         }
+      })
+    },
+
+    //消息方法
+    showMsg(msg,type = 'warning'){
+        this.msg = msg
+        this.msgType = type
+        this.msgShow = false
+
+        this.$nextTick(() => {
+        this.msgShow = true
       })
     }
   }

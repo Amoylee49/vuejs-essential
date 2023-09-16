@@ -1,6 +1,10 @@
 <template>
   <div class="row">
     <div class="col-md-4 col-md-offset-4 floating-box">
+<!-- //消息组件 -->
+       <!-- 消息组件 -->
+  <Message :show.sync="msgShow" :type="msgType" :msg="msg"/>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">请注册</h3>
@@ -27,9 +31,11 @@
           <div class="thumbnail" title="点击图片重新获取验证码" @click="getCaptcha">
             <div class="captcha vcenter" v-html="captchaTpl"></div>
           </div>
-          <button type="submit" class="btn btn-lg btn-success btn-block" @click="register">
-            <i class="fa fa-btn fa-sign-in"></i> 注册
-          </button>
+          <span @click="register">
+            <button type="submit" class="btn btn-lg btn-success btn-block">
+              <i class="fa fa-btn fa-sign-in"></i> 注册
+            </button>
+          </span>
         </div>
       </div>
     </div>
@@ -48,7 +54,11 @@ export default {
       username: '', // 用户名
       password: '', // 密码
       cpassword: '', // 确认密码
-      captcha: '' // 验证码
+      captcha: '', // 验证码
+//消息组件
+      msg: '', // 消息
+      msgType: '', // 消息类型
+      msgShow: false // 是否显示消息，默认不显示
     }
   },
   created() {
@@ -65,7 +75,7 @@ export default {
       setTimeout(() => {
         const target = e.target.type === 'submit' ? e.target : e.target.parentElement
 
-        if (true && target.canSubmit) {
+        if (true || target.canSubmit) {
           this.submit()
         }
       })
@@ -84,8 +94,9 @@ export default {
         const localUser = this.$store.state.user
 
         if (localUser) {
-          if (localUser.name === user.name) {
-            alert('用户名已存在')
+          if (false && localUser.name === user.name) {
+            // alert('用户名已存在')
+this.showMsg('用户名已存在','false')
           } else {
             this.login(user)
           }
@@ -97,8 +108,22 @@ export default {
     login(user) {
       // 为 => 分发 login 事件，以保存用户信息和登录
       this.$store.dispatch('login', user)
-      alert('注册成功')
+
+      // alert('注册成功')
+      this.showMsg('注册成功','success')
+    },
+
+    //消息方法
+    showMsg(msg, type = 'warning') {
+      this.msg = msg
+      this.msgType = type
+      this.msgShow = false
+
+      this.$nextTick(() => {
+        this.msgShow = true
+      })
     }
+
   }
 }
 </script>
