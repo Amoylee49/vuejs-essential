@@ -6,7 +6,7 @@
       <i class="fa fa-cog text-md i-middle"></i>
       编辑资料
     </router-link>
-    <a href="#" class="btn btn-default login-btn">
+    <a href="#" class="btn btn-default login-btn" @click="login">
       <i class="fa fa-user"></i> 登 录
     </a>
     <!-- 为 -->
@@ -15,14 +15,27 @@
     </router-link>
 
   </div>
-
-
 </template>
 
 <script>
 export default {
-  name: 'TheEntry'
+  name: 'TheEntry',
+
+  methods: {
+    login() {
+      this.$swal({
+        text: '你确定要退出吗?',
+        confirmButtonText: '退出'
+      }).then((res) => {
+        if (res.value) {
+          this.$store.dispatch('logout')
+        }
+      })
+    }
+  }
 }
+
+
 </script>
 
 <style scoped></style>
