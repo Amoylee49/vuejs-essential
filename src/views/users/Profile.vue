@@ -107,8 +107,10 @@ export default {
             hobbies: this.hobbies,
             introduction: this.introduction
           })
-          this.showMsg('修改成功','success')
-          // alert('修改成功')
+          // this.showMsg('修改成功','success')
+          // this.$message.showMsg('sdfsdf')
+          // 删除 alert，使用实例的 $message 的 show 方法
+      this.$message.show('修改成功')
         }
       })
     },
