@@ -27,7 +27,7 @@ import routes from './routes'
     path: '/:catchAll(.*)',
     // 重定向
     redirect: '/'
-  } 
+  }
 
 ] */
 
@@ -40,6 +40,21 @@ const router = createRouter({
 // routes.js文件？
   routes
 })
+
+/* router.beforeEach((to, from, next) => {
+  const auth = router.app.$options.store.state.auth
+
+  if (
+    (auth && to.path.indexOf('/auth/') !== -1) ||
+    (!auth && to.meta.auth)
+  ) {
+    next('/')
+  } else {
+    next()
+  }
+}
+
+) */
 
 
 export default router

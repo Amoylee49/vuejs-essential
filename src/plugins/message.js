@@ -1,22 +1,52 @@
-import MessageComponent from '../components/Message'
+import MessageComponent from '../components/Message.vue'
+import { createApp, nextTick } from 'vue';
 
-export default {
+const createMount = options => {
+  const mountNode = document.createElement('div')
+  document.body.appendChild(mountNode)
+
+  const app = createApp(MessageComponent, {
+    ...options,
+    remove() {
+      app.unmount(mountNode)
+      document.body.removeChild(mountNode)
+    }
+  })
+  return app.mount(mountNode)
+}
+
+const Message = options => {
+  return createMount(options)
+}
+  // extends : MessageComponent,
+
   // 插件的公开方法 install
-  install: (app) => {
+  Message.install = (app) => {
     // 使用 Vue.extend 基于我们传入的组件生成一个新的子类
-    const Message = app.extend(MessageComponent)
-    // new 一个新的实例
-    const vm = new Message()
-    // 挂载实例后返回实例目标
-    const $el = vm.$mount().$el
+    // const Message = app.component(MessageComponent)
+    // const Message = {
 
-    app.nextTick(() => {
+    //   extend : MessageComponent
+    // }
+    console.log(Message.name)
+    // console.log(Message.type)
+    console.log(Message.props)
+
+    // app.component('Message',{MessageComponent})
+    // new 一个新的实例
+
+    const vm = Message()
+
+    // 挂载实例后返回实例目标
+    const $el = vm.$el
+
+    nextTick:() => {
       // 在下一次 DOM 更新后，将实例目标添加到 #main-container 元素内部的最前面
       document.querySelector('#main-container').prepend($el)
-    })
+    }
 
     // 监听 show 值的改变
-    vm.$on('update:show', (value) => {
+   on : ('update:show', (value) => {
       // 更改当前的 show 值
       vm.show = value
     })
@@ -25,19 +55,22 @@ export default {
     const message = {
       //  更改消息并显示提示框，其逻辑跟我们之前写的 showMsg 一模一样
       show(msg = '', type = 'success') {
+        console.log(vm)
         vm.msg = msg
         vm.type = type
         vm.show = false
 
-        app.nextTick(() => {
+        nextTick: () => {
           vm.show = true
-        })
+        }
+        return true
       },
       // 关闭提示框
       hide() {
-        app.nextTick(() => {
+        nextTick: () => {
           vm.show = false
-        })
+        }
+        return true
       }
     }
 
@@ -47,4 +80,5 @@ export default {
     // 添加实例方法
     app.config.globalProperties.$message = message
   }
-}
+
+  export default Message

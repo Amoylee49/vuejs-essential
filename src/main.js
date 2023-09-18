@@ -4,14 +4,15 @@ import App from './App.vue'
 // 引入 store/index.js 的默认值
 import store from './store'
 
-// import { setupGlobComponents } from './components';
+import { setupGlobComponents } from './components';
 
 import VueSweetalert2 from './plugins/vue-sweetalert2'
 
 // 如果引入的是 index.js，可以使用下面的简写，等价于 import router from './router/index.js'
 import router from './router'
 
-import Message from './plugins/message'
+import Messagee from './plugins/message.js'
+import MessageComponent from './components/Message.vue'
 
 const app = createApp(App)
 
@@ -24,7 +25,9 @@ app.use(VueSweetalert2)
 app.use(store)
 
 //全局消息组件未生效
-// app.use(Message)
+// const Message = app.component('Message',Messagee)
+// app.use(Messagee)
+
 
 app.mount('#app')
 
@@ -43,7 +46,8 @@ new Vue({
 }).$mount('#app') */
 
 
-// setupGlobComponents(app);
+// app.config.globalProperties.$message = 
+setupGlobComponents(app);
 
 
 /* import Vue from 'vue'

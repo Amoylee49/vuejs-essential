@@ -7,7 +7,7 @@
 
 <script>
 const message = {
-  name: 'Message',
+  name: 'Messageeeeeeeeeeeeeeeee',
   props: {
     // 是否显示消息框
     show: {

@@ -92,7 +92,8 @@ export default {
         const user = {
           name: this.username,
           password: this.password,
-          avatar: `https://api.adorable.io/avatars/200/${this.username}.png`
+          // avatar: `https://api.adorable.io/avatars/200/${this.username}.png`
+          avatar: 'https://dgss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/qiusuo_icon/10597f220b047cee3e8ea50e91886d71.ico'
         }
         // 为 => 从仓库获取用户信息
         const localUser = this.$store.state.user

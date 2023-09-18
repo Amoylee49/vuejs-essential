@@ -12,6 +12,18 @@ export default [
         path: '',
         component:()=> import('@/views/users/Profile.vue'),
         meta : {auth: true}
+      },
+      {
+        path: '/users/1/edit_avatar',
+        name: 'EditAvatar2222',
+        component:()=> import('@/views/users/Avatar.vue'),
+        meta : {auth: true}
+      },
+      {
+        path: '/users/1/edit_password',
+        name: 'EditA222',
+        component:()=> import('@/views/users/Password.vue'),
+        meta : {auth: true}
       }
     ]
   },
