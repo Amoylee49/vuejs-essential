@@ -1,14 +1,19 @@
 <template>
   <div v-show="show" :class="`alert alert-${type} alert-dismissible`">
     <button @click="close" type="button" class="close"><span>×</span></button>
-    {{ msg }}
+    <span v-if="msg">{{ msg }}</span>
+    <!-- <span v-else>{{  }}</span> -->
+
+
   </div>
 </template>
 
 <script>
 const message = {
   name: 'Messageeeeeeeeeeeeeeeee',
-  props: {
+
+data(){
+  return{
     // 是否显示消息框
     show: {
       type: Boolean,
@@ -24,7 +29,27 @@ const message = {
       type: String,
       default: ''
     }
-  },
+  }
+},
+
+
+  /* props: {
+    // 是否显示消息框
+    show: {
+      type: Boolean,
+      default: false
+    },
+    // 消息框的类型
+    type: {
+      type: String,
+      default: 'success'
+    },
+    // 消息
+    msg: {
+      type: String,
+      default: ''
+    }
+  }, */
   watch: {
     show(value) {
       if (value) {

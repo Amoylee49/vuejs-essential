@@ -26,10 +26,13 @@ app.use(store)
 
 //全局消息组件未生效
 // const Message = app.component('Message',Messagee)
-// app.use(Messagee)
+app.use(Messagee)
 
 
 app.mount('#app')
+
+// app.config.globalProperties.$message =
+// setupGlobComponents(app);
 
 
 // createApp(App).use(router).use(store).use(message).mount('#app')
@@ -46,8 +49,7 @@ new Vue({
 }).$mount('#app') */
 
 
-// app.config.globalProperties.$message = 
-setupGlobComponents(app);
+
 
 
 /* import Vue from 'vue'

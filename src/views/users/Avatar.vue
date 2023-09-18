@@ -69,11 +69,13 @@ export default {
         img.onload = () => {
 
           this.$store.dispatch('updateUser',{avatar})
-          this.$message = this.show('上传成功','success')
+          // this.$message.show('上传成功呢')
+          this.$message.show('上传成功','success')
         }
 
         img.onerror = () => {
-            this.$message = this.show('上传失败', 'error')
+          this.$message.show('上传失败呢','error')
+            // this.$message = show('上传失败', 'error')
         }
 
 

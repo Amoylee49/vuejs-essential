@@ -1,8 +1,9 @@
 import MessageComponent from '../components/Message.vue'
-import { createApp, nextTick } from 'vue';
+import { createApp, nextTick, watch } from 'vue';
 
 const createMount = options => {
   const mountNode = document.createElement('div')
+  // mountNode.style.visibility="hidden";
   document.body.appendChild(mountNode)
 
   const app = createApp(MessageComponent, {
@@ -18,67 +19,62 @@ const createMount = options => {
 const Message = options => {
   return createMount(options)
 }
-  // extends : MessageComponent,
+// extends : MessageComponent,
 
-  // 插件的公开方法 install
-  Message.install = (app) => {
-    // 使用 Vue.extend 基于我们传入的组件生成一个新的子类
-    // const Message = app.component(MessageComponent)
-    // const Message = {
+// 插件的公开方法 install
+Message.install = (app) => {
+  // 使用 Vue.extend 基于我们传入的组件生成一个新的子类
 
-    //   extend : MessageComponent
-    // }
-    console.log(Message.name)
-    // console.log(Message.type)
-    console.log(Message.props)
+  //   extend : MessageComponent
+  // }
 
-    // app.component('Message',{MessageComponent})
-    // new 一个新的实例
+  // app.component('Message',{MessageComponent})
+  // new 一个新的实例
 
-    const vm = Message()
+  const vm = Message()
 
-    // 挂载实例后返回实例目标
-    const $el = vm.$el
+  // 挂载实例后返回实例目标
+  const $el = vm.$el
 
-    nextTick:() => {
-      // 在下一次 DOM 更新后，将实例目标添加到 #main-container 元素内部的最前面
-      document.querySelector('#main-container').prepend($el)
-    }
+  vm.$nextTick(() => {
+    // 在下一次 DOM 更新后，将实例目标添加到 #main-container 元素内部的最前面
+    document.querySelector('#main-container').prepend($el)
+  })
 
-    // 监听 show 值的改变
-   on : ('update:show', (value) => {
+  // 监听 show 值的改变 这里有问题
+  vm.on(
+    ('update:show', (value) => {
       // 更改当前的 show 值
       vm.show = value
     })
+  )
 
-    // 添加 show 和 hide 方法来显示和关闭提示框
-    const message = {
-      //  更改消息并显示提示框，其逻辑跟我们之前写的 showMsg 一模一样
-      show(msg = '', type = 'success') {
-        console.log(vm)
-        vm.msg = msg
-        vm.type = type
+
+  // 添加 show 和 hide 方法来显示和关闭提示框
+  const message = {
+    //  更改消息并显示提示框，其逻辑跟我们之前写的 showMsg 一模一样
+    show(msg = '', type = 'error') {
+      vm.msg = msg
+      vm.type = type
+      vm.show = false
+
+      vm.$nextTick(() => {
+        vm.show = true
+      })
+    },
+    // 关闭提示框
+    hide() {
+      vm.$nextTick(() => {
         vm.show = false
-
-        nextTick: () => {
-          vm.show = true
-        }
-        return true
-      },
-      // 关闭提示框
-      hide() {
-        nextTick: () => {
-          vm.show = false
-        }
-        return true
-      }
+      })
     }
-
-    // 添加实例方法
-    // app.prototype.$message = message
-
-    // 添加实例方法
-    app.config.globalProperties.$message = message
   }
 
-  export default Message
+  // 添加实例方法
+  // app.prototype.$message = message
+
+  // 添加实例方法
+  app.config.globalProperties.$message = message
+}
+
+export default Message
