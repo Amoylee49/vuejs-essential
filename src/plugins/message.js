@@ -42,12 +42,12 @@ Message.install = (app) => {
   })
 
   // 监听 show 值的改变 这里有问题
-  vm.on(
+ /*  vm.on(
     ('update:show', (value) => {
       // 更改当前的 show 值
       vm.show = value
     })
-  )
+  ) */
 
 
   // 添加 show 和 hide 方法来显示和关闭提示框

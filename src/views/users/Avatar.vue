@@ -12,13 +12,14 @@
           <div class="form-group">
             <label>头像预览：</label>
             <div>
-              <img :src="avatar" class="avatar-preview-img">
+              <img v-bind:src="avatar" class="avatar-preview-img" :alt="alt">
             </div>
-            <input v-model.trim.lazy="avatar" v-validator.required="{ title: '头像地址' }" type="text" class="form-control avatar-input">
 
           </div>
           <div class="form-group row">
-
+            <div class="col-md-8">
+              <input v-model.trim.lazy="avatar" v-validator.required="{ title: '头像地址' }" type="text" class="form-control avatar-input">
+            </div>
           </div>
 
           <div class="form-group">
@@ -38,7 +39,7 @@ export default {
   name: 'EditAvatar',
   data() {
     return {
-      avatar: '' ,//头像地址,
+      avatar: 'sdf' ,//头像地址,
       alt: '',
 
       msg: '',
@@ -46,22 +47,22 @@ export default {
       msgShow: false // 是否显示消息，默认不显示
     }
   },
+  //初始方法，在类外面
+  created(){
+    // 获取仓库 的用户信息
+    const user = this.$store.state.user
+    this.avatar = user.avatar
+    console.log(user)
+    console.log(user.avatar)
+
+
+    // if (user && typeof user === 'object') {
+      // 将仓库的用户头像赋值给当前头像地址
+    // }
+    this.alt = user.sex
+
+  },
   methods:{
-    create(){
-      // 获取仓库 的用户信息
-      const user = this.$store.state.user
-      console.log(user)
-      console.log(user.avatar)
-
-      // if (user && typeof user === 'object') {
-        // 将仓库的用户头像赋值给当前头像地址
-        this.avatar = user.avatar
-      // }
-      this.alt = user.sex
-
-    },
-
-
     updateAvatar(){
       const avatar = this.avatar
       if (avatar) {
@@ -77,7 +78,6 @@ export default {
           this.$message.show('上传失败呢','error')
             // this.$message = show('上传失败', 'error')
         }
-
 
         img.src = avatar
       }
