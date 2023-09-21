@@ -11,15 +11,20 @@
         </h1>
 
         <ul class="list-group">
-<h1>lllllllllllllllllllllllllllllllllllll</h1>
 
+          <!-- v-for -->
+          <li v-for="article in articles">
+            <img v-if="user" :src="user.avatar" alt="">
+            <router-link :to="`/articles/${article.articleId}/content`" class="title">
+              {{ article.title }}
+            </router-link>
 
+            <!-- {{ article}} -->
             <span class="meta pull-right">
-
+              <span class="timeago">{{ article.date }}</span>
+              <!-- <span class="timeago">{{ article.date | moment('from') }}</span> -->
             </span>
-
-
-
+          </li>
         </ul>
       </div>
     </div>
@@ -30,17 +35,17 @@
 // 引入 mapState 辅助函数
 import { mapState } from 'vuex'
 
-export default{
+export default {
   name: 'List',
-data(){
-  return {
-    auth: true
-  }
-},
+  data() {
+    return {
+      auth: true
+    }
+  },
 
 
 
-  computed:{
+  computed: {
     // 将指定的状态混入计算属性
     ...mapState([
       'auth',

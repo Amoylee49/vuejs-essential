@@ -12,6 +12,7 @@
     "font-awesome": "^4.7.0",
     "install": "^0.13.0",
     "mitt": "^3.0.1",
+    "mockjs": "^1.1.0",
     "moment": "^2.29.4",
     "node-emoji": "^2.1.0",
     "sweetalert2": "^7.15.1",

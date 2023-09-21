@@ -14,6 +14,9 @@ import router from './router'
 import Messagee from './plugins/message.js'
 import MessageComponent from './components/Message.vue'
 
+import { mockArticles } from './mock/data' //添加 mock测试文章
+import ls from './utils/localStorage'
+
 const app = createApp(App)
 
 // Vue.config.productionTip = false
@@ -29,7 +32,29 @@ app.use(store)
 app.use(Messagee)
 
 
+const AddMockData = (() => {
+  // 是否加入测试数据
+  const isAddMockData = true
+  // 用户数据
+  let userArticles = ls.getItem('articles')
+
+
+  if (Array.isArray(userArticles)) {
+    userArticles = userArticles.filter(article => parseInt(article.uid) === 1)
+  } else {
+    userArticles = []
+  }
+
+  if (isAddMockData) {
+    // 合并用户数据和测试数据，使用合并值作为所有文章
+    store.commit('UPDATE_ARTICLES', [...userArticles, ...mockArticles(10)])
+  } else {
+    // 使用用户数据作为所有文章
+    store.commit('UPDATE_ARTICLES', userArticles)
+  }
+})()
 app.mount('#app')
+
 
 // app.config.globalProperties.$message =
 // setupGlobComponents(app);
