@@ -10,11 +10,14 @@
       <div>
         <ul class="nav navbar-nav">
           <li v-for="(item, index) in navList" v-bind:class="{ active: index === navActiveIndex }">
-            <a href="#" @click="changeNavIndex(index)"> {{ item }}</a>
+
+              <router-link :to="`${item.path}`"  @click="changeNavIndex(index)"> {{ item.item }}</router-link>
+
+            <!-- <a href="#" @click="changeNavIndex(index)"> {{ item.item }}</a> -->
           </li>
 
           <!-- 编辑资料 -->
-          <li >
+          <li>
             <router-link to="/users/1/edit">
               <i class="fa fa-cog text-md i-middle"></i>
               编辑资料
@@ -50,7 +53,22 @@ export default {
         title: " learnKu js"
       },
       title: "logo js",
-      navList: ["社区", "文档", "问答", "头条"],
+      navList: [
+        {
+          path : "community",
+          item : "社区",
+        },
+        {
+          path : "document",
+          item : "文档",
+        },{
+          path : "askQuestion",
+          item : "问答",
+        },{
+          path : "headlines",
+          item : "头条",
+        }
+      ],
       navActiveIndex: 0
     }
 
@@ -72,5 +90,4 @@ export default {
   .navbar-default .navbar-nav>.active>a {
     background: rgba(0, 0, 0, .03);
   }
-}
-</style>
+}</style>
