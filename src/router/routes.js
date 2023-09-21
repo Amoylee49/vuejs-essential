@@ -43,6 +43,12 @@ export default [
         name: 'Column',
         component: () => import('@/views/articles/List.vue'),
         meta: { auth: true }
+      },
+      {
+        path: '/articles/:articleId/content',
+        name: 'Content',
+        component: () => import('@/views/articles/Content.vue'),
+        meta: { auth: true }
       }
     ]
   },

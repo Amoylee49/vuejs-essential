@@ -63,11 +63,12 @@ const getters = {
     // 所有文章是一个数组时
     if (Array.isArray(articles)) {
       // 传进来的 id 和文章的 articleId 相同时，返回这些文章
+
       articles = articles.filter(article => parseInt(id) === parseInt(article.articleId))
       // 根据文章长度，返回文章或者 null
       return articles.length ? articles[0] : null
+
     } else {
-      // 返回 null
       return null
     }
   }
