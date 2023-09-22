@@ -42,6 +42,7 @@ $fa-font-path: "~font-awesome/fonts/";
 @import "~font-awesome/scss/font-awesome";
 @import "./styles/main.scss";
 @import "./styles/extra.scss";
+@import "~animate.css/animate.min.css";
 
 body>.container {
   margin-top: 15px;
