@@ -21,14 +21,23 @@ const Message = options => {
 }
 // extends : MessageComponent,
 
+// eventBus.js
+import emitter from '../../node_modules/tiny-emitter/instance'
+
+// {
+//   $on: (...args) => emitter.on(...args),
+//   $once: (...args) => emitter.once(...args),
+//   $off: (...args) => emitter.off(...args),
+//   $emit: (...args) => emitter.emit(...args)
+
+// }
+
+
 // 插件的公开方法 install
 Message.install = (app) => {
+  // $on: (...args) => emitter.on(...args)
   // 使用 Vue.extend 基于我们传入的组件生成一个新的子类
 
-  //   extend : MessageComponent
-  // }
-
-  // app.component('Message',{MessageComponent})
   // new 一个新的实例
 
   const vm = Message()
@@ -42,12 +51,12 @@ Message.install = (app) => {
   })
 
   // 监听 show 值的改变 这里有问题
- /*  vm.on(
-    ('update:show', (value) => {
-      // 更改当前的 show 值
-      vm.show = value
-    })
-  ) */
+  // vm.on(
+  //   ('update:show', (value) => {
+  //     // 更改当前的 show 值
+  //     vm.show = value
+  //   })
+  // )
 
 
   // 添加 show 和 hide 方法来显示和关闭提示框
@@ -71,7 +80,7 @@ Message.install = (app) => {
   }
 
   // 添加实例方法
-  // app.prototype.$message = message
+  // app.prototype.$message = message vue2
 
   // 添加实例方法
   app.config.globalProperties.$message = message

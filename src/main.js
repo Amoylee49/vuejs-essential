@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, defineComponent,nextTick,onMounted, Vue } from 'vue'
 import App from './App.vue'
 
 // 引入 store/index.js 的默认值
@@ -17,6 +17,9 @@ import MessageComponent from './components/Message.vue'
 import { mockArticles } from './mock/data' //添加 mock测试文章
 import ls from './utils/localStorage'
 
+import Modal from './components/Modal.vue'
+
+
 const app = createApp(App)
 
 // Vue.config.productionTip = false
@@ -29,8 +32,14 @@ app.use(store)
 
 //全局消息组件未生效
 // const Message = app.component('Message',Messagee)
-app.use(Messagee)
+app.use(Messagee) //js里定义了全局变量 $message
+// app.use(Modal)
 
+// 注册一个选项对象
+app.component('Modal',Modal)
+// app.component('Modal', defineComponent(() =>
+//   import('./components/Modal.vue')
+// ))
 
 const AddMockData = (() => {
   // 是否加入测试数据
@@ -53,6 +62,18 @@ const AddMockData = (() => {
     store.commit('UPDATE_ARTICLES', userArticles)
   }
 })()
+
+
+// eventBus.js
+import emitter from 'tiny-emitter/instance'
+
+export default {
+  $on: (...args) => emitter.on(...args),
+  $once: (...args) => emitter.once(...args),
+  $off: (...args) => emitter.off(...args),
+  $emit: (...args) => emitter.emit(...args)
+}
+
 app.mount('#app')
 
 

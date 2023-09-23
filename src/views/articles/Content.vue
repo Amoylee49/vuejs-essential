@@ -18,10 +18,15 @@
           <div class="votes-container panel panel-default padding-md">
             <div class="panel-body vote-box text-center">
               <div class="btn-group">
-                <a @click="like" href="javascript:;" class="vote btn btn-primary popover-with-html" :class="likeClass ">
+                <a @click="like" href="javascript:;" class="vote btn btn-primary popover-with-html" :class="likeClass">
                   <i class="fa fa-thumbs-up animate__animated animate__shakeY"></i> {{ likeClass ? '已赞' : '点赞' }}
                 </a>
+                <div class="or"></div>
+                <button @click="showQrcode = true" class="btn btn-success"><i class="fa fa-heart"></i> 打赏</button>
+
+
               </div>
+
               <div class="voted-users animate__animated animate__swing">
                 <div class="user-lists ">
                   <span v-for="likeUser in likeUsers">
@@ -36,6 +41,28 @@
           </div>
 
 
+          <!-- 打赏弹窗 -->
+          <!-- v-model:show="showQrcode"  Vue3写法，    :show.sync vue2写法-->
+          <Modal v-model:show="showQrcode" class="text-center">
+            <template v-slot:header>
+              <div v-if="user">
+                <img :src="user.avatar" class="img-thumbnail avatar" width="48">
+              </div>
+            </template>
+            <div>
+              <p class="text-md">如果你想学习更多前端的知识，Learnku Vue.js.com 是个不错的开始</p>
+              <div class="payment-qrcode inline-block">
+                <h5>扫一扫打开 Learnku Vue.js.com</h5>
+                <!-- <p><img src="https://cdn.learnku.com/uploads/images/201803/25/2/g3CFVs0h7B.jpeg?imageView2/2/w/1024/h/0" width="160"></p> -->
+                <qrcode-vue value="https://learnku.com/vuejs/" :size="160"></qrcode-vue>
+              </div>
+            </div>
+            <template v-slot:footer>
+              <div>
+                <div class="text-center">祝你学习愉快 :)</div>
+              </div>
+            </template>
+          </Modal>
         </div>
       </div>
     </div>
@@ -47,11 +74,17 @@
 
 // import SimpleMDE from 'simplemde'
 import hljs from 'highlight.js'
-
+// import Modal from '../../components/Modal.vue';
+// 引入 qrcode.vue 的默认值
+import QrcodeVue from 'qrcode.vue'
 
 export default {
   name: 'content',
 
+  components: {
+    // Modal,
+    QrcodeVue
+  },
   data() {
     return {
       auth: true,
@@ -62,6 +95,7 @@ export default {
       uid: 1, // 用户 ID
       likeUsers: [], // 点赞用户列表
       likeClass: '', // 点赞样式
+      showQrcode: false, // 是否显示打赏弹窗
     }
 
   },
@@ -101,6 +135,11 @@ export default {
     }
   },
   methods: {
+    // close() {
+    //   // 触发事件以关闭弹窗
+    //   this.$emit('update:show', false)
+    // },
+
     like(e) {
       // 未登录时，提示登录
       if (false && !this.auth) {

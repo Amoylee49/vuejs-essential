@@ -14,14 +14,17 @@
 // import HelloWorld from './components/HelloWorld.vue';
 import TheHeaders from './components/layouts/TheHeaders.vue';
 import TheFooter from './components/layouts/TheFooters.vue';
+// import Modal from './components/Modal.vue';
 
 export default {
   name: 'App',
   components: {
     // HelloWorld
     TheHeaders,
-    TheFooter
-  }
+    TheFooter,
+    // Modal
+  },
+
 }
 </script>
 

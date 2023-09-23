@@ -2,10 +2,7 @@
   <div class="col-md-9 left-col">
     <div class="panel panel-default padding-md">
 <!-- //消息组件 -->
-<Message :show.sync ="msgShow" :msg="msg" :type="msgType"> </Message>
-<!-- <Message :show.sync="msgShow" :type="msgType" :msg="msg"/> -->
-
-
+<!-- <Message :show.sync ="msgShow" :msg="msg" :type="msgType"> </Message> -->
       <div class="panel-body">
         <h2><i class="fa fa-cog"></i> 编辑个人资料</h2>
         <hr>

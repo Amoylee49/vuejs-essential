@@ -117,7 +117,8 @@ this.showMsg('用户名已存在','false')
 
 
       // // alert('注册成功')
-      this.showMsg('注册成功','success')
+      this.$message.show('注册成功','succ')
+      // this.showMsg('注册成功','success')
     },
 
     //消息方法
