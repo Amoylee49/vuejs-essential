@@ -39,6 +39,18 @@
               </div>
             </div>
           </div>
+          <!-- 评论框 -->
+          <div id="reply-box" class="reply-box form box-block">
+            <div class="form-group comment-editor">
+              <textarea v-if="auth" id="editor" ></textarea>
+              <textarea v-else disabled class="form-control" placeholder="需要登录后才能发表评论." style="height:172px"></textarea>
+            </div>
+            <div class="form-group reply-post-submit">
+              <button id="reply-btn" :disabled="!auth" @click="comment" class="btn btn-primary">回复</button>
+              <span class="help-inline">Ctrl+Enter</span>
+            </div>
+            <div v-show="commentHtml" id="preview-box" class="box preview markdown-body" v-html="commentHtml"></div>
+          </div>
 
 
           <!-- 打赏弹窗 -->
@@ -63,7 +75,10 @@
               </div>
             </template>
           </Modal>
+
         </div>
+
+
       </div>
     </div>
 
@@ -112,7 +127,7 @@ export default {
     const article = this.$store.getters.getArticleById(articleId)
 
     if (article) {
-      this.user = this.$store.user
+      this.user = this.$store.state.user
       // 获取当前文章的 likeUsers
       let { uid, title, content, date, likeUsers } = article
 
@@ -181,3 +196,7 @@ export default {
 
 </script>
 
+<style scoped>
+.fade-enter-active, .fade-leave-active { transition: opacity .5s;}
+.fade-enter, .fade-leave-to { opacity: 0;}
+</style>

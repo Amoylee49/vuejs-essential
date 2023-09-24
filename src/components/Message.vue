@@ -12,46 +12,59 @@
 const message = {
   name: 'Messageeeeeeeeeeeeeeeee',
 
-data(){
-  return{
-    // 是否显示消息框
-    show: {
-      type: Boolean,
-      default: false
-    },
-    // 消息框的类型
-    type: {
-      type: String,
-      default: 'success'
-    },
-    // 消息
-    msg: {
-      type: String,
-      default: ''
+  data(){
+    return{
+      // 是否显示消息框
+      show: {
+        type: Boolean,
+        default: false
+      },
+      // 消息框的类型
+      type: {
+        type: String,
+        default: 'success'
+      },
+      // 消息
+      msg: {
+        type: String,
+        default: ''
+      }
     }
-  }
-},
+  },
+
+  props: {
+    // 是否显示消息框
+    // show: {
+    //   type: Boolean,
+    //   default: false
+    // },
+    // // 消息框的类型
+    // type: {
+    //   type: String,
+    //   default: 'success'
+    // },
+    // // 消息
+    // msg: {
+    //   type: String,
+    //   default: ''
+    // }
+  },
+  setup(props, cxt) {
+    const close = () => {
+      console.log('Message.vue setup Close method ' + cxt.emit('update:show', false))
+      cxt.emit('update:show', false)
+    }
 
 
-  /* props: {
-    // 是否显示消息框
-    show: {
-      type: Boolean,
-      default: false
-    },
-    // 消息框的类型
-    type: {
-      type: String,
-      default: 'success'
-    },
-    // 消息
-    msg: {
-      type: String,
-      default: ''
+
+    return {
+      close
     }
-  }, */
+
+  },
   watch: {
     show(value) {
+      console.log('Message.vue show method value:' + value)
       if (value) {
         this.$nextTick(() => {
           this.$el.scrollIntoView(true)
@@ -60,10 +73,12 @@ data(){
     }
   },
   methods: {
-    close() {
-      this.$emit('update:show', false)
-    }
-  }
+    // close(cxt) {
+    //   console.log('Message.vue Close method value:')
+    //   cxt.emit('update:show', false)
+    // }
+  },
+
 }
 
 export function setupMessageComponent(app) {

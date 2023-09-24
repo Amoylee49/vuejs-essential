@@ -7,3 +7,23 @@ module.exports = {
     ? '/vuejs-essential/dist/'
     : '/'
 }
+
+module.exports = {
+  // devServer: {
+  //   proxy: 'http://localhost:8080'
+  // },
+  devServer: {
+      open: true,
+      host: 'localhost',
+      port: 8080,
+      proxy: {
+          '/': {    //1
+              target: 'https://adorable.io/',    //2
+              changOrigin: true,
+              pathRewrite: {    //3
+                  '^/avatars': ''
+              }
+          }
+      }
+  }
+}

@@ -19,19 +19,6 @@ const createMount = options => {
 const Message = options => {
   return createMount(options)
 }
-// extends : MessageComponent,
-
-// eventBus.js
-import emitter from '../../node_modules/tiny-emitter/instance'
-
-// {
-//   $on: (...args) => emitter.on(...args),
-//   $once: (...args) => emitter.once(...args),
-//   $off: (...args) => emitter.off(...args),
-//   $emit: (...args) => emitter.emit(...args)
-
-// }
-
 
 // 插件的公开方法 install
 Message.install = (app) => {
