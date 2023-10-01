@@ -13,7 +13,7 @@ if (Array.isArray(localArticles) && localArticles.length) {
 }
 
 // 生成测试文章，参数 num 是生成数量
-export const mockArticles = (num = 10) => {
+export const mockArticles = (num = 33) => {
   const forbiddenNames = [localUserName, 'topics']
   let articles = []
   let unames = []
