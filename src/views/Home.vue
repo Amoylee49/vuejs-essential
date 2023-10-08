@@ -47,18 +47,26 @@
 
 
 
-
+      </div>
     </div>
-  </div>
+    <!-- 侧栏 -->
+            <TheSidebar/>
 </template>
 
 <script>
 import { ref, onMounted } from "vue"
 
 import { mapState } from 'vuex'
+// 引入 TheSidebar.vue 的默认值
+import TheSidebar from '@/components/layouts/TheSidebar.vue'
+
 export default {
 
   name: 'Home',
+  components:{
+    // 局部注册 TheSidebar
+    TheSidebar,
+  },
   data() {
     return {
       msg: '',

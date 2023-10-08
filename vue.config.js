@@ -20,10 +20,11 @@ module.exports = {
           '/': {    //1
               target: 'https://adorable.io/',    //2
               changOrigin: true,
+              ws: false,
               pathRewrite: {    //3
                   '^/avatars': ''
               }
           }
-      }
+      },
   }
 }

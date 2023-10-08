@@ -20,7 +20,10 @@ import MessageComponent from './components/Message.vue'
 import { mockArticles } from './mock/data' //添加 mock测试文章
 import ls from './utils/localStorage'
 
+// 引入全局主件
 import Modal from './components/Modal.vue'
+// import Slider from '@/components/Slider.vue'
+import components from '@/components'
 
 /* 引入 ElementPlus */
 import ElementPlus from 'element-plus'
@@ -44,11 +47,10 @@ app.directive('title',{ mounted(el){  el.focus() }})
 app.use(Messagee) //js里定义了全局变量 $message
 // app.use(Modal)
 
-// 注册一个选项对象
+// 注册一个选项对象 ,全局注册component
+app.use(components)
 app.component('Modal',Modal)
-// app.component('Modal', defineComponent(() =>
-//   import('./components/Modal.vue')
-// ))
+// app.component('Slider',Slider)
 
 const AddMockData = (() => {
   // 是否加入测试数据
