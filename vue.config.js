@@ -6,6 +6,13 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/vuejs-essential/dist/'
     : '/'
+,
+    //新增
+    // publicPath: '/XXX',//github仓库名
+    assetsDir: process.env.NODE_ENV === 'production'
+    ? '/vuejs-essential/dist/'
+    : '/',
+    outputDir:"dist",
 }
 
 module.exports = {

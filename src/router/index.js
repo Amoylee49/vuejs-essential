@@ -34,7 +34,7 @@ import routes from './routes'
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   linkExactActiveClass: 'active',
 
 // routes.js文件？
